@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/2410781005/INENP_K8S_Project.git
+    repoURL: https://github.com/2410781005/INENP_K8S_Project-ArgoCD-App.git
     targetRevision: feature/argocd
     path: deploy/app
     directory:
