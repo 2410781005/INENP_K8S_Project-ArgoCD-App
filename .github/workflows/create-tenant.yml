@@ -19,6 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create output folder
+        run: mkdir -p deploy/${{ github.event.inputs.deployment_company }}
+
       - name: Modify and copy files
         run: |
           for file in data/*; do
