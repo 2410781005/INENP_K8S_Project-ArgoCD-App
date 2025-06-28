@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/2410781005/INENP_K8S_Project/tree/feature/argocd
-    targetRevision: v0.3.0
+    repoURL: https://github.com/2410781005/INENP_K8S_Project
+    targetRevision: feature/argocd
     path: radius-service/chart
   destination:
     server: https://kubernetes.default.svc
