@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/2410781005/INENP_K8S_Project-ArgoCD-App.git
     targetRevision: feature/argocd
-    path: deploy/app
+    path: main
     directory:
       recurse: true
   destination:
