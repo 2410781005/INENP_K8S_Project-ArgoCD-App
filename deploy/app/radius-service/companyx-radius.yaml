@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/2410781005/INENP_K8S_Project.git
     targetRevision: main
-    chart: radius-service
+    path: charts/radius-service
     helm:
       parameters:
         - name: environment
