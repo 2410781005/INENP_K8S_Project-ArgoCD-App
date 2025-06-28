@@ -36,7 +36,7 @@ jobs:
             mkdir -p "$(dirname "$target_path")"
           
             # Ersetzen und speichern
-            sed 's/ALT/${{ github.event.inputs.deployment_company }}/g' "$file" > "$target_path"
+            sed 's/test-telco/${{ github.event.inputs.deployment_company }}/g' "$file" > "$target_path"
           done
 
       - name: Commit and push changes
