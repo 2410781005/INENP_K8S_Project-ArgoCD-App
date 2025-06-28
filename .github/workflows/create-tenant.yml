@@ -1,24 +1,30 @@
-name: create tenant with namespace input
+name: Edit, Copy and Commit Files
 
 on:
-  workflow_dispatch: # manuell starten
+  workflow_dispatch:
+    inputs:
+      deployment_company:
+        description: 'Namen des neuen Unternehmens'
+        required: true
+        default: 'company-xyz'
 
 permissions:
   contents: write
 
 jobs:
-  edit-files:
+  edit-and-copy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Modify files in data/ directory
+      - name: Modify and copy files
         run: |
           for file in data/*; do
             if [ -f "$file" ]; then
-              sed -i 's/telco-1/NEU/g' "$file"
+              # Ersetze "ALT" durch "NEU" und speichere im Ordner output/
+              sed 's/NEU/NEU/g' "$file" > "deploy/${{ github.event.inputs.deployment_company }}/$(basename "$file")"
             fi
           done
 
@@ -27,6 +33,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          git add data/
-          git commit -m "Auto-Update: Werte ersetzt in data/" || echo "No changes to commit"
+          git add deploy/${{ github.event.inputs.deployment_company }}
+          git commit -m "Bearbeitete Dateien in output/ kopiert" || echo "No changes to commit"
           git push
