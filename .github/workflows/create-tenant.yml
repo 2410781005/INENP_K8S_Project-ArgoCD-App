@@ -20,15 +20,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create output folder
-        run: mkdir -p deploy/${{ github.event.inputs.deployment_company }}
+        run: 
+          mkdir -p deploy/${{ github.event.inputs.deployment_company }}
+          mkdir -p deploy/${{ github.event.inputs.deployment_company }}/statefulsets
 
       - name: Modify and copy files
         run: |
-          for file in data/*; do
-            if [ -f "$file" ]; then
-              # Ersetze "ALT" durch "NEU" und speichere im Ordner output/
-              sed 's/NEU/${{ github.event.inputs.deployment_company }}/g' "$file" > "deploy/${{ github.event.inputs.deployment_company }}/$(basename "$file")"
-            fi
+
+          find data/ -type f | while read file; do
+            # Zielpfad berechnen: output/<relativer Pfad von data/>
+            rel_path="${file#data/}"
+            target_path="deploy/${{ github.event.inputs.deployment_company }}/$rel_path"
+          
+            # Zielverzeichnis anlegen, falls nötig
+            mkdir -p "$(dirname "$target_path")"
+          
+            # Ersetzen und speichern
+            sed 's/ALT/${{ github.event.inputs.deployment_company }}/g' "$file" > "$target_path"
           done
 
       - name: Commit and push changes
