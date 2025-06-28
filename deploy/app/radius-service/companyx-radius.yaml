@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: companyx-radius
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/2410781005/INENP_K8S_Project/tree/main
+    targetRevision: feature/argocd
+    chart: radius-service
+    helm:
+      parameters:
+        - name: environment
+          value: dev
+    path: charts/radius-service # oder leer, wenn du ein Helm-Chart aus Helm-Repo verwendest
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: companyx-radius
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
