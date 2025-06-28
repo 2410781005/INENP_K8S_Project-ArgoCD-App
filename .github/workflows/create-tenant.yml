@@ -1,0 +1,32 @@
+name: create tenant with namespace input
+
+on:
+  workflow_dispatch: # manuell starten
+
+permissions:
+  contents: write
+
+jobs:
+  edit-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Modify files in data/ directory
+        run: |
+          for file in data/*; do
+            if [ -f "$file" ]; then
+              sed -i 's/telco-1/NEU/g' "$file"
+            fi
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add data/
+          git commit -m "Auto-Update: Werte ersetzt in data/" || echo "No changes to commit"
+          git push
