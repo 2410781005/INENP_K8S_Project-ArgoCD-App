@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: telco-1
+  name: NEU
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     path: charts/radius-service
   destination:
     server: https://kubernetes.default.svc
-    namespace: telco-1
+    namespace: NEU
   syncPolicy:
     automated:
       prune: true
