@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: company-xyz
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/2410781005/INENP_K8S_Project.git
+    targetRevision: argocd
+    path: charts/radius-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: company-xyz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
