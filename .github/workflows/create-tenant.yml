@@ -24,7 +24,7 @@ jobs:
           for file in data/*; do
             if [ -f "$file" ]; then
               # Ersetze "ALT" durch "NEU" und speichere im Ordner output/
-              sed 's/NEU/NEU/g' "$file" > "deploy/${{ github.event.inputs.deployment_company }}/$(basename "$file")"
+              sed 's/NEU/${{ github.event.inputs.deployment_company }}/g' "$file" > "deploy/${{ github.event.inputs.deployment_company }}/$(basename "$file")"
             fi
           done
 
