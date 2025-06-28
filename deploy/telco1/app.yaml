@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: telco-1
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/2410781005/INENP_K8S_Project.git
+    targetRevision: argocd
+    path: charts/radius-service
+    helm:
+      valueFiles:
+        - deployment-values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: telco-1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
