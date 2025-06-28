@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/2410781005/INENP_K8S_Project/tree/main
+    repoURL: https://github.com/2410781005/INENP_K8S_Project.git
     targetRevision: feature/argocd
     chart: radius-service
     helm:
