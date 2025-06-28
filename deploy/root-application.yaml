@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/2410781005/INENP_K8S_Project-ArgoCD-App.git
     targetRevision: main
-    path: deploy/app/radius-service
+    path: deploy/app
     directory:
       recurse: true
   destination:
