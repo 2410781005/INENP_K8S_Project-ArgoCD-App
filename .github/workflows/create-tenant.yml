@@ -1,4 +1,4 @@
-name: Edit, Copy and Commit Files
+name: Edit, Copy and Commit Company files for deployment
 
 on:
   workflow_dispatch:
